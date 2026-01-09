@@ -8,10 +8,10 @@ class LoanCalculatorGUI:
         self.root.geometry("400x300")
 
         # Create input fields
-        self.principal_label = ttk.Label(root, text="Principal:")
-        self.principal_label.grid(row=0, column=0, pady=5, sticky=tk.W)
-        self.principal_entry = ttk.Entry(root)
-        self.principal_entry.grid(row=0, column=1, pady=5)
+        self.Capital_label = ttk.Label(root, text="Capital:")
+        self.Capital_label.grid(row=0, column=0, pady=5, sticky=tk.W)
+        self.Capital_entry = ttk.Entry(root)
+        self.Capital_entry.grid(row=0, column=1, pady=5)
 
         self.rate_label = ttk.Label(root, text="Annual Rate (%):")
         self.rate_label.grid(row=1, column=0, pady=5, sticky=tk.W)
@@ -45,7 +45,7 @@ class LoanCalculatorGUI:
 
     def calculate_loan(self):
         try:
-            principal = float(self.principal_entry.get())
+            Capital = float(self.Capital_entry.get())
             annual_rate = float(self.rate_entry.get()) / 100
             years = int(self.term_entry.get())
 
@@ -53,9 +53,9 @@ class LoanCalculatorGUI:
             num_payments = years * 12
 
             # Monthly payment calculation
-            monthly_payment = principal * (monthly_rate * (1 + monthly_rate) ** num_payments) / ((1 + monthly_rate) ** num_payments - 1)
+            monthly_payment = Capital * (monthly_rate * (1 + monthly_rate) ** num_payments) / ((1 + monthly_rate) ** num_payments - 1)
             total_payment = monthly_payment * num_payments
-            total_interest = total_payment - principal
+            total_interest = total_payment - Capital
 
             # Update display
             self.monthly_value.config(text=f"{monthly_payment:.2f}")
@@ -63,7 +63,7 @@ class LoanCalculatorGUI:
             self.total_interest_value.config(text=f"{total_interest:.2f}")
 
         except ValueError:
-            messagebox.showerror("Input Error", "Please enter valid numeric values for principal, rate, and term.")
+            messagebox.showerror("Input Error", "Please enter valid numeric values for Capital, rate, and term.")
 
 
 def main():
